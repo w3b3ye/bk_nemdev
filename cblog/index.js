@@ -2,8 +2,11 @@
 
 var path = require("path");
 var express = require("express");
-var app = express();
 var ejs = require("ejs");
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
+var app = express();
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
