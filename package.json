@@ -1,12 +1,23 @@
 {
   "name": "bk_nemdev",
   "version": "1.0.0",
-  "description": "",
+  "description": "Code for boon \"Beginning Node.js, Express, ..\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "w3b3ye",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3b3ye/bk_nemdev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/w3b3ye/bk_nemdev/issues"
+  },
+  "homepage": "https://github.com/w3b3ye/bk_nemdev#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
