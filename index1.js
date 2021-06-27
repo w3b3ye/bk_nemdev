@@ -16,16 +16,20 @@ app.get("/json", function (req, res) {
 });
 
 app.get("/", function (req, res) {
-  //Sending a html page for home.
+  //Sending home page.
   res.sendFile(path.resolve(__dirname, "index.html"));
 });
 
 app.get("/contact", function (req, res) {
-  //Sending a html page for home.
+  //Sending a html page for contact.
   res.sendFile(path.resolve(__dirname, "contact.html"));
 });
 
 app.get("/about", function (req, res) {
-  //Sending a html page for home.
+  //Sending a html page for about.
   res.sendFile(path.resolve(__dirname, "about.html"));
+});
+
+app.use((req, res) => {
+  res.status(404).sendFile(path.resolve(__dirname, "nofound.html"));
 });
