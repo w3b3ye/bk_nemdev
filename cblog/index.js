@@ -40,6 +40,12 @@ app.get("/post", function (req, res) {
   res.render("post");
 });
 
+app.get("/post/new", function (req, res) {
+  //Sending a html page for about.
+  //res.sendFile(path.resolve(__dirname, "pages/post.html"));
+  res.render("create");
+});
+
 
 app.use((req, res) => {
   //res.status(404).sendFile(path.resolve(__dirname, "pages/nofound.html"));
