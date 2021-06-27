@@ -1,3 +1,5 @@
+/** Basic Node.js example. Server will respond "html" based on URL  */
+
 var http = require('http');
 var fs = require('fs');
 
