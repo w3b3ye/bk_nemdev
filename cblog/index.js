@@ -3,10 +3,16 @@
 var path = require("path");
 var express = require("express");
 var ejs = require("ejs");
+var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var blogpost = require("./models/blogpost.js");
+
 
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
 var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -46,6 +52,18 @@ app.get("/post/new", function (req, res) {
   res.render("create");
 });
 
+// app.post("/post/store", function (req, res) {
+//   //console.log(req.body);
+//   blogpost.create(req.body,function (error,blogpost){
+//     res.redirect("/");
+//   });
+
+// });
+
+app.post("/post/store", async (req, res) => {
+  await blogpost.create(req.body);
+  res.redirect("/");
+});
 
 app.use((req, res) => {
   //res.status(404).sendFile(path.resolve(__dirname, "pages/nofound.html"));
