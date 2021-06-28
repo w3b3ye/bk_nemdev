@@ -22,10 +22,18 @@ app.listen(4000, function () {
 });
 
 
-app.get("/", function (req, res) {
-  //Sending home page.
-  //res.sendFile(path.resolve(__dirname, "pages/index.html"));
-  res.render("index");
+// app.get("/", function (req, res) {
+//   //Sending home page.
+//   //res.sendFile(path.resolve(__dirname, "pages/index.html"));
+//   res.render("index");
+// });
+
+app.get("/", async (req, res) => {
+  var blogposts = await blogpost.find({});
+  //console.log(blogposts);
+  res.render("index", {
+    blogposts: blogposts
+  });
 });
 
 app.get("/contact", function (req, res) {
