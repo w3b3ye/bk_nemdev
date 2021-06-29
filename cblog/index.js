@@ -77,14 +77,13 @@ app.post("/post/search", async (req, res) => {
 
   var text = req.body.txt;
   var blogposts = await blogpost.find({
-    title: text
+    $or: [{ title: text }, { body: text }]
   }/* , (error, blogpost) => {
     console.log(error, blogpost);
   } */);
   res.render("index", {
     blogposts: blogposts
   });
-
 });
 
 app.use((req, res) => {
