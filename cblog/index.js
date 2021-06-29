@@ -95,7 +95,7 @@ app.post("/post/search", async (req, res) => {
   const query = { $text: { $search: term } };
 
   var blogposts = await blogpost.find(query);
-  console.log(blogposts);
+  //console.log(blogposts);
   if (blogposts != "") {
     res.render("index", {
       blogposts: blogposts
