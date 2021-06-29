@@ -5,7 +5,12 @@ var Schema = mongoose.Schema;
 
 var blogpostSchema = new Schema({
     title: String,
-    body: String
+    body: String,
+    username: String,
+    datePosted: {
+        type: Date,
+        default: new Date()
+    }
 });
 
 //Create index for full text search. Use of index method has been depreciated
