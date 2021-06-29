@@ -95,10 +95,15 @@ app.post("/post/search", async (req, res) => {
   const query = { $text: { $search: term } };
 
   var blogposts = await blogpost.find(query);
-
-  res.render("index", {
-    blogposts: blogposts
-  });
+  console.log(blogposts);
+  if (blogposts != "") {
+    res.render("index", {
+      blogposts: blogposts
+    });
+  }
+  else {
+    res.status(404).render("nofound");
+  }
 });
 
 app.use((req, res) => {
