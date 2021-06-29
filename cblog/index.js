@@ -48,18 +48,18 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
+app.get("/post/new", function (req, res) {
+  //Sending a html page for about.
+  //res.sendFile(path.resolve(__dirname, "pages/post.html"));
+  res.render("create");
+});
+
 app.get("/post/:id", async (req, res) => {
   //Sending a html page for about.
   //res.sendFile(path.resolve(__dirname, "pages/post.html"));
   var blogposts = await blogpost.findById(req.params.id);
   //console.log(blogposts);
   res.render("post", { blogposts });
-});
-
-app.get("/post/new", function (req, res) {
-  //Sending a html page for about.
-  //res.sendFile(path.resolve(__dirname, "pages/post.html"));
-  res.render("create");
 });
 
 // app.post("/post/store", function (req, res) {
