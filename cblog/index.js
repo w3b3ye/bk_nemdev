@@ -73,14 +73,29 @@ app.post("/post/store", async (req, res) => {
   res.redirect("/");
 });
 
+//Normal search code
+// app.post("/post/search", async (req, res) => {
+
+//   var text = req.body.txt;
+//   var blogposts = await blogpost.find({
+//     $or: [{ title: text }, { body: text }]
+//   }/* , (error, blogpost) => {
+//     console.log(error, blogpost);
+//   } */);
+//   res.render("index", {
+//     blogposts: blogposts
+//   });
+// });
+
+
+//Full text search code
 app.post("/post/search", async (req, res) => {
 
-  var text = req.body.txt;
-  var blogposts = await blogpost.find({
-    $or: [{ title: text }, { body: text }]
-  }/* , (error, blogpost) => {
-    console.log(error, blogpost);
-  } */);
+  var term = req.body.txt;
+  const query = { $text: { $search: term } };
+
+  var blogposts = await blogpost.find(query);
+
   res.render("index", {
     blogposts: blogposts
   });

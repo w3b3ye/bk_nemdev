@@ -8,5 +8,12 @@ var blogpostSchema = new Schema({
     body: String
 });
 
+//Create index for full text search. Use of index method has been depreciated
+//blogpostSchema.index({ title: "text", body: "text" });
+
 var blogpost = mongoose.model('blogpost', blogpostSchema);
 module.exports = blogpost;
+
+//Create index for full text search
+blogpost.createIndexes({ title: "text", body: "text" });
+
