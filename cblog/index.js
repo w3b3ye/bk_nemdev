@@ -73,6 +73,20 @@ app.post("/post/store", async (req, res) => {
   res.redirect("/");
 });
 
+app.post("/post/search", async (req, res) => {
+
+  var text = req.body.txt;
+  var blogposts = await blogpost.find({
+    title: text
+  }/* , (error, blogpost) => {
+    console.log(error, blogpost);
+  } */);
+  res.render("index", {
+    blogposts: blogposts
+  });
+
+});
+
 app.use((req, res) => {
   //res.status(404).sendFile(path.resolve(__dirname, "pages/nofound.html"));
   res.status(404).render("nofound");

@@ -3,21 +3,23 @@
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
   <div class="container px-4 px-lg-5">
     <a class="navbar-brand" href="/">Start Bootstrap</a>
+    <form action="/post/search" method="POST">
+      <ul class="navbar-nav ms-auto py-4 py-lg-0">
+        <li>
+          <input
+            type="text"
+            class="form-control"
+            id="searchTxt"
+            style="width: 18rem"
+            name="txt"
+          />
+        </li>
 
-    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-      <li>
-        <input
-          type="text"
-          class="form-control"
-          id="searchTxt"
-          style="width: 18rem"
-        />
-      </li>
-
-      <button class="btn btn-primary btn-sm" id="searchButton" type="submit">
-        Search
-      </button>
-    </ul>
+        <button class="btn btn-primary btn-sm" id="searchButton" type="submit">
+          Search
+        </button>
+      </ul>
+    </form>
     <button
       class="navbar-toggler"
       type="button"
