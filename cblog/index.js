@@ -76,7 +76,7 @@ app.get("/post/:id", async (req, res) => {
 app.post("/post/store", async (req, res) => {
   let image = req.files.image;
   image.mv(path.resolve(__dirname, "public/img", image.name), async (error) => {
-    await blogpost.create(req.body);
+    await blogpost.create({ ...req.body, image: '/img/' + image.name });
     res.redirect("/");
   });
 });

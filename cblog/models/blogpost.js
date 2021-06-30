@@ -11,6 +11,7 @@ var blogpostSchema = new Schema({
         type: Date,
         default: new Date()
     },
+    image: String
 
 });
 
