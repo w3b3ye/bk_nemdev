@@ -6,6 +6,7 @@ var ejs = require("ejs");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var blogpost = require("./models/blogpost.js");
+var fileupload = require("express-fileupload");
 
 
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
@@ -13,6 +14,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileupload);
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -71,8 +73,11 @@ app.get("/post/:id", async (req, res) => {
 // });
 
 app.post("/post/store", async (req, res) => {
-  await blogpost.create(req.body);
-  res.redirect("/");
+  let image = req.files.image;
+  image.mv(path.resolve(__dirname, "public/img", image.name), async (error) => {
+    await blogpost.create(req.body);
+    res.redirect("/");
+  });
 });
 
 //Normal search code

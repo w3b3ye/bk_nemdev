@@ -10,7 +10,8 @@ var blogpostSchema = new Schema({
     datePosted: {
         type: Date,
         default: new Date()
-    }
+    },
+
 });
 
 //Create index for full text search. Use of index method has been depreciated
