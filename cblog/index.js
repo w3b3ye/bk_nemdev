@@ -8,17 +8,29 @@ var mongoose = require("mongoose");
 var blogpost = require("./models/blogpost.js");
 var fileupload = require("express-fileupload");
 
-
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
 var app = express();
 
-app.use(fileupload());
+//Below code is not working.
+/* var validatemiddleware = (req, res, next) => {
+  if (!req.files || !req.files.image || !req.body.title) {
+    return res.redirect('/posts/new')
+    console.log("empty!")
+  }
+  next()
+} */
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileupload());
+//app.use('/posts/store', validatemiddleware);
+
 
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+
 
 app.listen(4000, function () {
   console.log("App is listening on port 4000.");
