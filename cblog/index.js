@@ -12,9 +12,10 @@ var fileupload = require("express-fileupload");
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
 var app = express();
 
+app.use(fileupload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileupload);
+
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
