@@ -11,14 +11,13 @@ var fileupload = require("express-fileupload");
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
 var app = express();
 
-//Below code is not working.
-/* var validatemiddleware = (req, res, next) => {
+
+var validatemiddleware = (req, res, next) => {
   if (!req.files || !req.files.image || !req.body.title) {
-    return res.redirect('/posts/new')
-    console.log("empty!")
+    return res.redirect('/post/new')
   }
   next()
-} */
+}
 
 //Uncomment below code and code at line 34 to test custom middleware 
 /* var custommiddleware = (req, res, next) => {
@@ -30,7 +29,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileupload());
-//app.use('/posts/store', validatemiddleware);
+app.use('/post/store', validatemiddleware);
 //app.use(custommiddleware);
 
 
