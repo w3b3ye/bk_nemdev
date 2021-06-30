@@ -20,12 +20,18 @@ var app = express();
   next()
 } */
 
+//Uncomment below code and code at line 34 to test custom middleware 
+/* var custommiddleware = (req, res, next) => {
+  console.log("Custom middleware called.");
+  next();
+}; */
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileupload());
 //app.use('/posts/store', validatemiddleware);
-
+//app.use(custommiddleware);
 
 
 app.use(express.static("public"));
