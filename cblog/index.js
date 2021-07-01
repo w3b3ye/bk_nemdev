@@ -1,11 +1,9 @@
 /** Clean-blog main index file. */
 
-var path = require("path");
 var express = require("express");
 var ejs = require("ejs");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var blogpost = require("./models/blogpost.js");
 var fileupload = require("express-fileupload");
 
 //Controllers
@@ -14,6 +12,9 @@ var aboutctrl = require('./controllers/about');
 var contactctrl = require('./controllers/contact');
 var searchctrl = require('./controllers/search');
 var nofoundctrl = require('./controllers/nofound');
+var homectrl = require('./controllers/home');
+var storepostctrl = require('./controllers/storepost');
+var getpostctrl = require('./controllers/getpost');
 
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
 var app = express();
@@ -39,30 +40,22 @@ app.listen(4000, function () {
   console.log("App is listening on port 4000.");
 });
 
-app.get("/", async (req, res) => {
-  var blogposts = await blogpost.find({});
-  res.render("index", {
-    blogposts: blogposts
-  });
-});
-
+app.get("/", homectrl);
 app.get("/post/new", newpostctrl);
 app.get("/about", aboutctrl);
 app.get("/contact", contactctrl);
+app.get("/post/:id", getpostctrl);
 
 app.post("/post/search", searchctrl);
+app.post("/post/store", storepostctrl);
+
 app.use(nofoundctrl);
 
-app.get("/post/:id", async (req, res) => {
-  var blogposts = await blogpost.findById(req.params.id);
-  res.render("post", { blogposts });
-});
-
-app.post("/post/store", async (req, res) => {
+/* app.post("/post/store", async (req, res) => {
   let image = req.files.image;
   image.mv(path.resolve(__dirname, "public/img", image.name), async (error) => {
     await blogpost.create({ ...req.body, image: '/img/' + image.name });
     res.redirect("/");
   });
-});
+}); */
 
