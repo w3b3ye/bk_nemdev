@@ -8,6 +8,9 @@ var mongoose = require("mongoose");
 var blogpost = require("./models/blogpost.js");
 var fileupload = require("express-fileupload");
 
+//Controllers
+var newpostctrl = require('./controllers/newpost');
+
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
 var app = express();
 
@@ -55,7 +58,7 @@ app.get("/", async (req, res) => {
     blogposts: blogposts
   });
 });
-
+/* 
 app.get("/contact", function (req, res) {
   //Sending a html page for contact.
   //res.sendFile(path.resolve(__dirname, "pages/contact.html"));
@@ -66,13 +69,18 @@ app.get("/about", function (req, res) {
   //Sending a html page for about.
   //res.sendFile(path.resolve(__dirname, "pages/about.html"));
   res.render("about");
-});
+}); */
 
-app.get("/post/new", function (req, res) {
+//Below code was in use without "controllers" layer
+/* app.get("/post/new", function (req, res) {
   //Sending a html page for about.
   //res.sendFile(path.resolve(__dirname, "pages/post.html"));
   res.render("create");
-});
+}); */
+
+app.get("/post/new", newpostctrl);
+
+var newpostctrl = require('./controllers/newpost');
 
 app.get("/post/:id", async (req, res) => {
   //Sending a html page for about.
