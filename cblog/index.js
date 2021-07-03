@@ -15,6 +15,7 @@ var nofoundctrl = require('./controllers/nofound');
 var homectrl = require('./controllers/home');
 var storepostctrl = require('./controllers/storepost');
 var getpostctrl = require('./controllers/getpost');
+var newuserctrl = require('./controllers/newuser');
 
 //middlewares
 var validatemiddleware = require('./middleware/validationmiddleware.js');
@@ -43,6 +44,7 @@ app.get("/post/new", newpostctrl);
 app.get("/about", aboutctrl);
 app.get("/contact", contactctrl);
 app.get("/post/:id", getpostctrl);
+app.get("/users/register", newuserctrl);
 
 app.post("/post/search", searchctrl);
 app.post("/post/store", storepostctrl);
