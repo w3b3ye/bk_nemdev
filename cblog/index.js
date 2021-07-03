@@ -17,6 +17,8 @@ var storepostctrl = require('./controllers/storepost');
 var getpostctrl = require('./controllers/getpost');
 var newuserctrl = require('./controllers/newuser');
 var storeuserctrl = require('./controllers/storeuser');
+var loginctrl = require('./controllers/login');
+var loginuserctrl = require('./controllers/loginuser');
 
 //middlewares
 var validatemiddleware = require('./middleware/validationmiddleware.js');
@@ -46,10 +48,12 @@ app.get("/about", aboutctrl);
 app.get("/contact", contactctrl);
 app.get("/post/:id", getpostctrl);
 app.get("/users/register", newuserctrl);
+app.get("/users/login", loginctrl);
 
 app.post("/post/search", searchctrl);
 app.post("/post/store", storepostctrl);
 app.post("/users/register", storeuserctrl);
+app.post("/users/login", loginuserctrl);
 
 app.use(nofoundctrl);
 
