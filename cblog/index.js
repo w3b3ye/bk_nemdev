@@ -5,6 +5,7 @@ var ejs = require("ejs");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var fileupload = require("express-fileupload");
+var exprxsession = require("express-session");
 
 //Controllers
 var newpostctrl = require('./controllers/newpost');
@@ -34,6 +35,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+
+app.use(exprxsession({
+  secret: 'secret key'
+}));
 
 app.listen(4000, function () {
   console.log("App is listening on port 4000.");
