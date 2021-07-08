@@ -23,6 +23,8 @@ var loginuserctrl = require('./controllers/loginuser');
 
 //middlewares
 var validatemiddleware = require('./middleware/validationmiddleware.js');
+var usermiddleware = require('./middleware/usermiddleware.js')
+var ifauthenticatedmiddleware = require('./middleware/ifauthenticatedmiddleware.js')
 
 //Database
 mongoose.connect("mongodb://localhost:27017/db_cblog", { useNewUrlParser: true });
@@ -48,17 +50,17 @@ app.use(fileupload());
 app.use('/post/store', validatemiddleware);
 
 app.get("/", homectrl);
-app.get("/post/new", newpostctrl);
+app.get("/post/new", usermiddleware, newpostctrl);
 app.get("/about", aboutctrl);
 app.get("/contact", contactctrl);
 app.get("/post/:id", getpostctrl);
-app.get("/users/register", newuserctrl);
-app.get("/users/login", loginctrl);
+app.get("/users/register", ifauthenticatedmiddleware, newuserctrl);
+app.get("/users/login", ifauthenticatedmiddleware, loginctrl);
 
 app.post("/post/search", searchctrl);
-app.post("/post/store", storepostctrl);
-app.post("/users/register", storeuserctrl);
-app.post("/users/login", loginuserctrl);
+app.post("/post/store", usermiddleware, storepostctrl);
+app.post("/users/register", ifauthenticatedmiddleware, storeuserctrl);
+app.post("/users/login", ifauthenticatedmiddleware, loginuserctrl);
 
 app.use(nofoundctrl);
 
