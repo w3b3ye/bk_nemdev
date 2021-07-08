@@ -1,5 +1,6 @@
 /** Clean-blog main index file. */
 
+//Import statements
 var express = require("express");
 var ejs = require("ejs");
 var bodyParser = require("body-parser");
@@ -20,6 +21,7 @@ var newuserctrl = require('./controllers/newuser');
 var storeuserctrl = require('./controllers/storeuser');
 var loginctrl = require('./controllers/login');
 var loginuserctrl = require('./controllers/loginuser');
+var loggedinctrl = require('./controllers/loggedin');
 
 //middlewares
 var validatemiddleware = require('./middleware/validationmiddleware.js');
@@ -49,6 +51,7 @@ app.listen(4000, function () {
 app.use(fileupload());
 app.use('/post/store', validatemiddleware);
 
+app.use("*", loggedinctrl);
 app.get("/", homectrl);
 app.get("/post/new", usermiddleware, newpostctrl);
 app.get("/about", aboutctrl);
